@@ -15,13 +15,15 @@ const showProducts = (products) => {
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
       <div>
-    <img class="product-image" src=${image}></img>
+      <img class="product-image" src=${image}></img>
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
       <h2>Price: $ ${product.price}</h2>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
+      <p class="text-danger">Overall rating: ${product.rating.rate}/5</p>
+      <p>Overall reviewer: ${product.rating.count}</p>
+      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-danger">add to cart</button>
+      <button onclick="showDetails(${product.id},${image},${product.title},${product.description},${product.price})" id="details-btn" class="btn btn-danger">Details</button></div>
       `;
     document.getElementById("all-products").appendChild(div);
   }
@@ -79,3 +81,17 @@ const updateTotal = () => {
     getInputValue("total-tax");
   document.getElementById("total").innerText = (grandTotal).toFixed(2);
 };
+//show details part of item
+const showDetails = (id,image,title,description,price) => {
+  const div = document.createElement("div");
+    div.innerHTML = `<div class="single-product">
+      <div>
+      <img class="product-image" src=${image}></img>
+      </div>
+      <h3>${title}</h3>
+      <h2>Price: $ ${price}</h2>
+      <p>${description}</p>
+      <button onclick="addToCart(${id},${price})" id="addToCart-btn" class="buy-now btn btn-danger">add to cart</button>
+      `;
+      document.getElementById('details').appendChild(div);
+}
