@@ -10,19 +10,22 @@ const showProducts = (products) => {
   for (const product of allProducts) {
     const image = product.image;
     const div = document.createElement("div");
-    div.classList.add("product");
-    div.innerHTML = `<div class="single-product">
-      <div>
-      <img class="product-image" src=${image}></img>
-      </div>
-      <h3>${product.title}</h3>
-      <p>Category: ${product.category}</p>
-      <h2>Price: $ ${product.price}</h2>
-      <p class="text-danger">Overall rating: ${product.rating.rate}/5</p>
-      <p>Overall reviewer: ${product.rating.count}</p>
-      <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-danger">add to cart</button>
-      <button id="details-btn" class="btn btn-danger">Details</button></div>
-      `;
+    div.classList.add("card-group","m-2");
+    div.innerHTML = `
+      <div class="card rounded-5 p-2 single-product" style="height:550px;background-color:rgb(250, 217, 217)">
+        <img src=${image} class="w-75 mx-auto" alt="..." style="height:170px;">
+        <div class="card-body">
+          <h5 class="card-title">${product.title.slice(0,41)} .....</h5>
+          <p>Category: ${product.category}</p>
+          <h3>Price: <span class="text-danger">$ ${product.price}</span></h3>
+          <p>${product.description.slice(0,60)}...</p>
+          <p><i class="bi bi-star-fill text-danger"></i> ${product.rating.rate}  <i class="bi bi-person-fill text-danger"></i> ${product.rating.count}</p>
+        </div>
+        <div class="card-body">
+          <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-danger">add to cart</button>
+          <button id="details-btn" class="btn btn-outline-danger">Details</button>
+        </div>
+      </div>`
     document.getElementById("all-products").appendChild(div);
   }
 };
